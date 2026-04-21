@@ -43,7 +43,7 @@ const NavBar = () => {
           {!userData && (
             <IoPersonCircle
               onClick={() => setShow((prev) => !prev)}
-              className="w-[50px] h-[50px] fill-black cursor-pointer"
+              className="w-[50px] h-[50px] fill-white cursor-pointer"
             />
           )}
           {userData && (
@@ -76,7 +76,10 @@ const NavBar = () => {
           )}
           {show && (
             <div className=" absolute top-[110%] right-[15%] flex items-center flex-col justify-center gap-2 text-[16px] rounded-md bg-white px-[15px] py-[10px] border-2 border-black  hover:border-white hover:text-white cursor-pointer hover:bg-black">
-              <span onClick={() => navigate("/profile")} className=" bg-black text-white px-[30px] py-[10px] rounded-2xl hover:bg-gray-600">
+              <span
+                onClick={() => navigate("/profile")}
+                className=" bg-black text-white px-[30px] py-[10px] rounded-2xl hover:bg-gray-600"
+              >
                 My Profile
               </span>
               <span className=" bg-black text-white px-[30px] py-[10px] rounded-2xl hover:bg-gray-600">
@@ -87,77 +90,48 @@ const NavBar = () => {
         </div>
         <MdOutlineMenu
           onClick={() => setShowHam((prev) => !prev)}
-          className="w-[35px] h-[35px] lg:hidden  fill-black cursor-pointer"
+          className="w-[35px] h-[35px] lg:hidden  fill-white cursor-pointer"
         />
 
-        {/* <div
-          className={`fixed top-0 left-0 w-[100vw] h-[100vh]  bg-[#000000d6] items-center justify-center flex-col gap-10 z-10 lg:hidden ${showHam ? "translate-x-[0] transition  duration-600" : "translate-x-[-100%] transition  duration-600"}`}
+        
+        <div
+          className={`fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#000000d6] flex flex-col items-center justify-center gap-10 z-10 lg:hidden transform transition-transform duration-500 ease-in-out ${
+            showHam ? "translate-x-0" : "-translate-x-full"
+          }`}
         >
           <GiSplitCross
             onClick={() => setShowHam((prev) => !prev)}
-            className="w-[30px] h-[30px] rounded-full bg-black  fill-white absolute top-5 right-[5%] "
+            className="w-[30px] h-[30px] rounded-full bg-black fill-white absolute top-5 right-[5%] cursor-pointer"
           />
-            {!userData && (
-            <IoPersonCircle
-              className="w-[50px] h-[50px] fill-black cursor-pointer"
-            />
+
+          {!userData && (
+            <IoPersonCircle className="w-[50px] h-[50px] fill-white cursor-pointer" />
           )}
+
           {userData && (
-            <div
-              className="w-[50px]  h-[50px] rounded-full text-white flex  items-center  gap-2 justify-center text-[20px] border-2 bg-black border-white cursor-pointer"
-            >
+            <div className="w-[50px] h-[50px] rounded-full text-white flex items-center justify-center text-[20px] border-2 bg-black border-white cursor-pointer">
               {userData?.name ? userData.name.slice(0, 1).toUpperCase() : "?"}
             </div>
           )}
+
           {userData?.role === "Educator" && (
-            <div className="  w-[200px] h-[40px] border-2 border-white text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer">
-              My Profile
-            </div>
+            <>
+              <div
+                onClick={() => navigate("/profile")}
+                className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer"
+              >
+                My Profile
+              </div>
+              <div className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer">
+                My Courses
+              </div>
+
+              <div className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer">
+                Dashboard
+              </div>
+            </>
           )}
-          {userData?.role === "Educator" && (
-            <div className="w-[200px]  h-[40px] border-2 border-white text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer">
-              Dashboard
-            </div>
-          )}
-        </div> */}
-        <div
-  className={`fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#000000d6] flex flex-col items-center justify-center gap-10 z-10 lg:hidden transform transition-transform duration-500 ease-in-out ${
-    showHam ? "translate-x-0" : "-translate-x-full"
-  }`}
->
-  {/* Close Button */}
-  <GiSplitCross
-    onClick={() => setShowHam((prev) => !prev)}
-    className="w-[30px] h-[30px] rounded-full bg-black fill-white absolute top-5 right-[5%] cursor-pointer"
-  />
-
-  {/* User Icon */}
-  {!userData && (
-    <IoPersonCircle className="w-[50px] h-[50px] fill-white cursor-pointer" />
-  )}
-
-  {userData && (
-    <div className="w-[50px] h-[50px] rounded-full text-white flex items-center justify-center text-[20px] border-2 bg-black border-white cursor-pointer">
-      {userData?.name ? userData.name.slice(0, 1).toUpperCase() : "?"}
-    </div>
-  )}
-
-  {/* Educator Options */}
-  {userData?.role === "Educator" && (
-    <>
-      <div onClick={() => navigate("/profile")} className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer">
-        My Profile
-      </div>
-      <div className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer">
-        My Courses
-      </div>
-
-      <div className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer">
-        Dashboard
-      </div>
-    </>
-  )}
-   {!userData ? (
+          {!userData ? (
             <span
               onClick={() => navigate("/login")}
               className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer"
@@ -172,7 +146,7 @@ const NavBar = () => {
               Logout
             </span>
           )}
-</div>
+        </div>
       </div>
     </div>
   );

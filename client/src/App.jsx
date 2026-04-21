@@ -8,6 +8,7 @@ import useCurrentUser from "./customeHook/useCurrentUser";
 import { useSelector } from "react-redux";
 import Profile from "./page/Profile";
 import ForgetPass from "./page/ForgetPass";
+import EditPage from "./page/EditPage";
 
 const App = () => {
    useCurrentUser()
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/profile" element={ userData ?<Profile/> : <Navigate to={"/SingUp"}/>}/>
         {/* <Route path="/forget"  element = {userData ? <ForgetPass/> : <Navigate to={"/SingUp"}/>}/> */}
         <Route path="/forget" element={<ForgetPass/>}/>
+        <Route path="/editProfile" element={ userData ?<EditPage/> : <Navigate to={"/SingUp"}/>}/>
       </Routes>
     </>
   );
