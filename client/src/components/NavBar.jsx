@@ -46,14 +46,14 @@ const NavBar = () => {
               className="w-[50px] h-[50px] fill-white cursor-pointer"
             />
           )}
-          {userData && (
+          {userData?.photoUrl ?  <img   onClick={() => setShow((prev) => !prev)}  className="w-[50px]  h-[50px] rounded-full text-white flex  items-center  justify-center text-[20px] border-2 bg-black border-white cursor-pointer" src={userData?.photoUrl} /> :
             <div
               onClick={() => setShow((prev) => !prev)}
               className="w-[50px]  h-[50px] rounded-full text-white flex  items-center  justify-center text-[20px] border-2 bg-black border-white cursor-pointer"
             >
               {userData?.name ? userData.name.slice(0, 1).toUpperCase() : "?"}
             </div>
-          )}
+          }
           {userData?.role === "Educator" && (
             <div className="px-[20px] py-[10px] border-2 border-white text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer">
               Dashboard
@@ -108,11 +108,11 @@ const NavBar = () => {
             <IoPersonCircle className="w-[50px] h-[50px] fill-white cursor-pointer" />
           )}
 
-          {userData && (
+          {userData?.photoUrl ? <img src={userData?.photoUrl} className="w-[50px]  h-[50px] rounded-full text-white flex  items-center  justify-center text-[20px] border-2 bg-black border-white cursor-pointer"/> : 
             <div className="w-[50px] h-[50px] rounded-full text-white flex items-center justify-center text-[20px] border-2 bg-black border-white cursor-pointer">
               {userData?.name ? userData.name.slice(0, 1).toUpperCase() : "?"}
             </div>
-          )}
+          }
 
           {userData?.role === "Educator" && (
             <>

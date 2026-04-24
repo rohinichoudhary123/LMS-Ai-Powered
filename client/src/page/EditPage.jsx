@@ -10,33 +10,38 @@ import { ClipLoader } from "react-spinners";
 const EditPage = () => {
   let navigate = useNavigate();
   let { userData } = useSelector((state) => state.user);
+  console.log(userData);
+  
   const [name, setName] = useState(userData.name || "");
-  const [description, setDescription] = useState(userData.Description || "");
+  const [description, setDescription] = useState(userData.description || "");
   const [photoUrl, setPhotoUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  console.log(name , description , photoUrl);
-  
+  console.log(name, description);
+  console.log(photoUrl);
 
-   let formdata = new FormData()
-   formdata.append("name" , name)
-   formdata.append("description" , description)
-   formdata.append("photoUrl" , photoUrl  )
   const updateProfilePage = async (data) => {
+    const formdata = new FormData();
+    formdata.append("name", name);
+    formdata.append("description", description);
+
+    if (photoUrl) {
+      formdata.append("photoUrl", photoUrl);
+    }
     setLoading(true);
     try {
       let res = await axios.post(
         "http://localhost:3000/api/user/profile",
-        formdata, 
+        formdata,
         { withCredentials: true },
       );
 
-      dispatch(setUserData(res.data));
+      dispatch(setUserData(res.data.data));
       console.log(res.data);
-      
-       setLoading(false);
-       navigate("/")
-       toast.success("Profile Update ")
+
+      setLoading(false);
+      navigate("/");
+      toast.success("Profile Update ");
     } catch (error) {
       console.log(error.response?.data?.message);
       toast.error(error.response?.data?.message);
@@ -80,7 +85,8 @@ const EditPage = () => {
               id="image"
               type="file"
               name="photoUrl"
-              accept="image*/"
+              accept="image/*"
+              
               placeholder="photoUrl"
               onChange={(e) => setPhotoUrl(e.target.files[0])}
               className="w-full px-4 py-2 cursor-pointer  border rounded-md text-sm"
@@ -134,11 +140,13 @@ const EditPage = () => {
             ></textarea>
           </div>
 
-          <div className=" flex items-center  cursor-pointer justify-center ">
-            <button onClick={updateProfilePage} className="text-white   bg-black w-full py-2 rounded-md" disabled={loading}>
-               {loading ? <ClipLoader size={30} color="#fff" /> : "Save Changes"}
+            <button
+              onClick={updateProfilePage}
+              className="text-white  cursor-pointer  bg-black w-full py-2 rounded-md"
+              disabled={loading}
+            >
+              {loading ? <ClipLoader size={30} color="#fff" /> : "Save Changes"}
             </button>
-          </div>
         </form>
       </div>
     </div>

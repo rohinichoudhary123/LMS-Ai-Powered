@@ -47,10 +47,10 @@ const Profile = () => {
           </div>
 
           <div className="flex gap-1 text-lg items-center justify-start ">
-            <span className="font-semibold text-gray-700">
+            <span className="font-semibold text-gray-700">  
               Enrolled Courses:
             </span>
-            <h1>{userData?.enrolledCourse.length}</h1>
+            <h1>{userData?.enrolledCourse.length || 0}</h1>
           </div>
         </div>
         <div className=" flex flex-col items-center m-2 justify-center">

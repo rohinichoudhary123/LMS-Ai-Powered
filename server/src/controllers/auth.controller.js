@@ -153,10 +153,8 @@ export const logoutController = async (req, res) => {
 };
 
 export const sendOtp = async (req, res) => {
-  console.log("request came")
   try {
     let { email } = req.body;
-    console.log("check 1")
 
     let user = await UserModel.findOne({ email });
     if (!user) {
@@ -164,7 +162,6 @@ export const sendOtp = async (req, res) => {
         message: "User Not Found",
       });
     }
-    console.log("check 2")
 
     let otp = Math.floor(1000 + Math.random() * 9999);
     let otpHash = await bcrypt.hash(otp.toString(), 10);
@@ -172,12 +169,10 @@ export const sendOtp = async (req, res) => {
     // user.otpExpires = Date.now() + 5 * 60 * 1000;
     user.otpExpires = new Date(Date.now() + 5 * 60 * 1000);
     user.isOtpVerify = false;
-    console.log("check 3")
 
 
     await user.save();
 
-    console.log("check 4")
     
     // await sendMail(email, otp);
     await sendMail({
@@ -185,7 +180,6 @@ export const sendOtp = async (req, res) => {
       subject: "Reset Your Password",
       html: `<p>Your OTP for Password Reset is <b> ${otp}</b>. It expires in 5 minutes. </p>`,
     });
-    console.log("check 5")
 
     return res.status(200).json({
       success: true,

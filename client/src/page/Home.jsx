@@ -5,6 +5,7 @@ import { SiViaplay } from "react-icons/si";
 import ai from '../assets/ai.png'
 import ai2 from '../assets/SearchAi.png'
 import Logo from "../components/Logo";
+import ExploreCourses from "../components/ExploreCourses";
 const Home = () => {
   return (
     <div className="w-[100%] overflow-hidden">
@@ -49,6 +50,7 @@ const Home = () => {
       
       </div>
         <Logo/>
+        <ExploreCourses/>
     </div>
   );
 };
