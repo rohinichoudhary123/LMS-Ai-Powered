@@ -26,7 +26,7 @@ const NavBar = () => {
       toast.success("User Logout SuccessFully");
     } catch (error) {
       console.log(error.response.data.message);
-      dispatch(setUserData(error.response.data.message));
+      dispatch(setUserData(null));
     }
   };
   return (
@@ -40,20 +40,29 @@ const NavBar = () => {
           />
         </div>
         <div className="w-[30%] lg:flex items-center justify-center gap-4 hidden">
-          {!userData && (
+          {userData ? (
+            userData.photoUrl ? (
+              <img
+                onClick={() => setShow((prev) => !prev)}
+                className="w-[50px] h-[50px] rounded-full text-white flex items-center justify-center text-[20px] border-2 bg-black border-white cursor-pointer"
+                src={userData.photoUrl}
+                alt="profile"
+              />
+            ) : (
+              <div
+                onClick={() => setShow((prev) => !prev)}
+                className="w-[50px] h-[50px] rounded-full text-white flex items-center justify-center text-[20px] border-2 bg-black border-white cursor-pointer"
+              >
+                {userData.name ? userData.name.slice(0, 1).toUpperCase() : "?"}
+              </div>
+            )
+          ) : (
             <IoPersonCircle
               onClick={() => setShow((prev) => !prev)}
               className="w-[50px] h-[50px] fill-white cursor-pointer"
             />
           )}
-          {userData?.photoUrl ?  <img   onClick={() => setShow((prev) => !prev)}  className="w-[50px]  h-[50px] rounded-full text-white flex  items-center  justify-center text-[20px] border-2 bg-black border-white cursor-pointer" src={userData?.photoUrl} /> :
-            <div
-              onClick={() => setShow((prev) => !prev)}
-              className="w-[50px]  h-[50px] rounded-full text-white flex  items-center  justify-center text-[20px] border-2 bg-black border-white cursor-pointer"
-            >
-              {userData?.name ? userData.name.slice(0, 1).toUpperCase() : "?"}
-            </div>
-          }
+
           {userData?.role === "Educator" && (
             <div className="px-[20px] py-[10px] border-2 border-white text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer">
               Dashboard
@@ -93,7 +102,6 @@ const NavBar = () => {
           className="w-[35px] h-[35px] lg:hidden  fill-white cursor-pointer"
         />
 
-        
         <div
           className={`fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#000000d6] flex flex-col items-center justify-center gap-10 z-10 lg:hidden transform transition-transform duration-500 ease-in-out ${
             showHam ? "translate-x-0" : "-translate-x-full"
@@ -108,11 +116,16 @@ const NavBar = () => {
             <IoPersonCircle className="w-[50px] h-[50px] fill-white cursor-pointer" />
           )}
 
-          {userData?.photoUrl ? <img src={userData?.photoUrl} className="w-[50px]  h-[50px] rounded-full text-white flex  items-center  justify-center text-[20px] border-2 bg-black border-white cursor-pointer"/> : 
+          {userData?.photoUrl ? (
+            <img
+              src={userData?.photoUrl}
+              className="w-[50px]  h-[50px] rounded-full text-white flex  items-center  justify-center text-[20px] border-2 bg-black border-white cursor-pointer"
+            />
+          ) : (
             <div className="w-[50px] h-[50px] rounded-full text-white flex items-center justify-center text-[20px] border-2 bg-black border-white cursor-pointer">
               {userData?.name ? userData.name.slice(0, 1).toUpperCase() : "?"}
             </div>
-          }
+          )}
 
           {userData?.role === "Educator" && (
             <>
