@@ -51,7 +51,7 @@ const Courses = () => {
                     <td className=" py-3 px-4 flex items-center gap-4">
                       {courses.thumbnail ? (
                         <img
-                          className="w-34 h-20 object-cover rounded-md object-fit"
+                          className="w-40 h-20 object-cover rounded-md object-fit"
                           src={courses.thumbnail}
                           alt=""
                         />
@@ -105,13 +105,13 @@ const Courses = () => {
                 <div className="flex gap-4 items-center ">
                   {courses.thumbnail ? (
                     <img
-                      className="w-16 h-16 object-cover rounded-md "
+                      className="w-30 h-20 object-cover  rounded-md "
                       src={courses.thumbnail}
                       alt=""
                     />
                   ) : (
                     <img
-                      className="w-16 h-16 object-cover rounded-md "
+                      className="w-30 h-20 object-cover rounded-md "
                       src={empty}
                       alt=""
                     />

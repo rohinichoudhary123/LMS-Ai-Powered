@@ -14,10 +14,12 @@ import Courses from "./page/educator/Courses";
 import CreateCourses from "./page/educator/CreateCourses"
 import useGetCreateCourses from "./customeHook/useGetCreateCourses";
 import EditCourses from "./page/educator/EditCourses";
+import useGetPublished from "./customeHook/useGetPublished";
 
 const App = () => {
    useCurrentUser()
    useGetCreateCourses()
+   useGetPublished()
   const {userData} = useSelector(state =>state.user)
   return (
     <>

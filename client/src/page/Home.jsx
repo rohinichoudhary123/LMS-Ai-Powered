@@ -6,6 +6,7 @@ import ai from '../assets/ai.png'
 import ai2 from '../assets/SearchAi.png'
 import Logo from "../components/Logo";
 import ExploreCourses from "../components/ExploreCourses";
+import CardPage from "../components/CardPage";
 const Home = () => {
   return (
     <div className="w-[100%] overflow-hidden">
@@ -51,6 +52,7 @@ const Home = () => {
       </div>
         <Logo/>
         <ExploreCourses/>
+        <CardPage/>
     </div>
   );
 };

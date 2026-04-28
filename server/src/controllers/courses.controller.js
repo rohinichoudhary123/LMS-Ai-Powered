@@ -127,9 +127,7 @@ export const editCourses = async (req, res) => {
     let UpdateCourse = await CoursesModel.findByIdAndUpdate(
       courseId,
       updateData,
-      {
-        new: true,
-      },
+        { returnDocument: "after" }
     );
 
     return res.status(200).json({
@@ -152,7 +150,7 @@ export const getCoursesId = async (req, res) => {
   try {
     let { courseId } = req.params;
 
-    let course = await getCoursesId.findById(courseId);
+    let course = await CoursesModel.findById(courseId);
 
     if (!course) {
       return res.status(400).json({
@@ -166,6 +164,8 @@ export const getCoursesId = async (req, res) => {
       data: course,
     });
   } catch (error) {
+    console.log(error);
+    
     return res.status(500).json({
       success: false,
       message: "Interval server error",
@@ -185,9 +185,7 @@ export const removeCourses = async (req, res) => {
         message: "Courses is Not Found",
       });
     }
-    let removeCourse = await CoursesModel.findByIdAndDelete(courseId, {
-      new: true,
-    });
+    let removeCourse = await CoursesModel.findByIdAndDelete(courseId,   { returnDocument: "after" });
 
     return res.status(200).json({
       success: true,
