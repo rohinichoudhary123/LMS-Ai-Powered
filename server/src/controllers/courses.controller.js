@@ -5,6 +5,7 @@ export const createCourses = async (req, res) => {
   try {
     let { title, category } = req.body;
 
+
     if (!title || !category) {
       return res.status(400).json({
         message: "title and category is required",
@@ -13,32 +14,31 @@ export const createCourses = async (req, res) => {
 
     let courses = await CoursesModel.create({
       title,
-      description,
-      create: req.user,
+      category,
+      createdBy: req.userId,
     });
+
+    console.log(courses);
+
+    console.log(req.userId);
 
     if (!courses) {
       return res.status(400).json({
-        message: "Courses are not create",
+        message: "Courses are not created",
       });
     }
-
     return res.status(200).json({
-      success: true,
-      message: "Courses are create SuccessFully",
       data: courses,
     });
   } catch (error) {
-    console.log( "This is create Courses Controller",  error);
+    console.log("Error in createCourses:", error);
 
     return res.status(500).json({
       success: false,
-      message: "Interval server error",
-      error: error.message,
+      message: "Internal server error",
     });
   }
 };
-
 export const getPublicCourses = async (req, res) => {
   try {
     let courses = await CoursesModel.find({ isPublished: true });
@@ -67,14 +67,20 @@ export const getPublicCourses = async (req, res) => {
 
 export const getCreateCourses = async (req, res) => {
   try {
-    const userId = req.user;
-    let course = await CoursesModel.find({ create: user });
+    const userId = req.userId;
+    let course = await CoursesModel.find({ createdBy: userId });
 
     if (!course) {
       return res.status(400).json({
         message: "Courses is not found",
       });
     }
+
+    return res.status(200).json({
+      success:true,
+      message:" get Create Courses SuccessFully",
+      data:course
+    })
   } catch (error) {
     console.log(error);
 
@@ -96,7 +102,7 @@ export const editCourses = async (req, res) => {
     let thumbnail;
 
     if (req.file) {
-      let thumbnail = await uploadOnCloudinary(req.file.path);
+      thumbnail = await uploadOnCloudinary(req.file.path);
     }
 
     let course = await CoursesModel.findById(courseId);
@@ -118,7 +124,13 @@ export const editCourses = async (req, res) => {
       thumbnail,
     };
 
-    let  UpdateCourse = await findByIdAndUpdate(courseId, updateData, { new: true });
+    let UpdateCourse = await CoursesModel.findByIdAndUpdate(
+      courseId,
+      updateData,
+      {
+        new: true,
+      },
+    );
 
     return res.status(200).json({
       success: true,
@@ -140,7 +152,7 @@ export const getCoursesId = async (req, res) => {
   try {
     let { courseId } = req.params;
 
-    let course = await findById(courseId);
+    let course = await getCoursesId.findById(courseId);
 
     if (!course) {
       return res.status(400).json({
@@ -166,14 +178,16 @@ export const removeCourses = async (req, res) => {
   try {
     let { courseId } = req.params;
 
-    let course = await findById(courseId);
+    let course = await CoursesModel.findById(courseId);
 
     if (!course) {
       return res.status(400).json({
         message: "Courses is Not Found",
       });
     }
-    let removeCourse = await CoursesModel.findByIdAndDelete(courseId, { new: true });
+    let removeCourse = await CoursesModel.findByIdAndDelete(courseId, {
+      new: true,
+    });
 
     return res.status(200).json({
       success: true,

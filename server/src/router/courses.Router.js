@@ -7,7 +7,7 @@ import upload from "../middlewares/multer.js "
 const coursesRouter = express.Router()
 
 
-coursesRouter.post("/cerate" , authMiddleware , createCourses)
+coursesRouter.post("/create" , authMiddleware , createCourses)
 
 coursesRouter.get("/getPublishedCourses" , getPublicCourses)
 

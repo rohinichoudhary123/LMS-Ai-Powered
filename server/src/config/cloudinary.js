@@ -9,7 +9,7 @@ const uploadOnCloudinary = async (filePath) => {
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
-
+  
   
   try {
     if (!filePath) {
@@ -20,14 +20,12 @@ const uploadOnCloudinary = async (filePath) => {
       resource_type: "auto",
     });
 
-     console.log("UploadResult",uploadResult.secure_url);
 
-    console.log(uploadResult);
     fs.unlinkSync(filePath);
     return uploadResult.secure_url;
   } catch (error) {
     fs.unlinkSync(filePath);
-    console.error(error);
+    console.error("error in uploading in cloudinary,",error);
   }
 };
 

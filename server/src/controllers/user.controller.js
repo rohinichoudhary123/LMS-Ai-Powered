@@ -4,7 +4,7 @@ import UserModel from "../model/user.Model.js";
 export const getCurrentUser = async (req, res) => {
   try {
     //   let userId = await  UserModel.findById(req.user).select("-password")
-    let user = req.user;
+    let user = req.userId;
 
     if (!user) {
       return res.status(400).json({
@@ -26,19 +26,16 @@ export const getCurrentUser = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    let userId = req.user;
+    let userId = req.userId;
+    // console.log("thi is my",req.file)
 
     let { name, description } = req.body;
-    console.log(name, description);
 
     let photoUrl;
 
     if (req.file) {
       photoUrl = await uploadOnCloudinary(req.file.path);
     }
-    console.log(req?.file);
-    
-    console.log("this is image upload", photoUrl);
 
     const user = await UserModel.findByIdAndUpdate(
       userId,
@@ -49,7 +46,6 @@ export const updateProfile = async (req, res) => {
       },
       { new: true },
     );
-    console.log("This is user data in upload image", user);
 
     if (!user) {
       return res.status(400).json({

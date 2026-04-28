@@ -6,49 +6,49 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Name is required"],
     },
-    description:{
-        type:String,
-        // required:[true , " Description is Required"],
+    description: {
+      type: String,
+      // required:[true , " Description is Required"],
     },
-    email:{
-        type:String,
-        required:[true , "Email is Required"],
-        unique:[true , "Email is unique"]
+    email: {
+      type: String,
+      required: [true, "Email is Required"],
+      unique: [true, "Email is unique"],
     },
-    password:{
-        type:String,
-        required:[true , "Pass word is required"]
-
+    password: {
+      type: String,
+      required: [true, "Pass word is required"],
     },
-    role:{
-            type:String,
-            enum:["Student" , "Educator"],
-            required:[true , "ROle  is required"]
-    }, 
-    photoUrl:{
-        type:String,
-        default:''
+    role: {
+      type: String,
+      enum: ["Student", "Educator"],
+      required: [true, "ROle  is required"],
     },
-    enrolledCourse:[{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:"Courses"
-    }],
-     resetOtp:{
-        type:String
+    photoUrl: {
+      type: String,
+      default: "",
     },
-    otpExpires:{
-        type:Date
+    enrolledCourse: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Courses",
+      },
+    ],
+    resetOtp: {
+      type: String,
     },
-    isOtpVerify:{
-        type:Boolean,
-        default:false
-    }
+    otpExpires: {
+      type: Date,
+    },
+    isOtpVerify: {
+      type: Boolean,
+      default: false,
+    },
   },
-  
+
   { timestamps: true },
 );
 
+const UserModel = mongoose.model("users", UserSchema);
 
- const  UserModel = mongoose.model("users" , UserSchema)
-
- export default  UserModel
+export default UserModel;

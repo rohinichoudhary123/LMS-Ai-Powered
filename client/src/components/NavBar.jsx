@@ -64,7 +64,7 @@ const NavBar = () => {
           )}
 
           {userData?.role === "Educator" && (
-            <div className="px-[20px] py-[10px] border-2 border-white text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer">
+            <div onClick={() => navigate("/dashboard")} className="px-[20px] py-[10px] border-2 border-white text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer">
               Dashboard
             </div>
           )}
@@ -139,7 +139,7 @@ const NavBar = () => {
                 My Courses
               </div>
 
-              <div className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer">
+              <div onClick={() => navigate("/dashboard")} className="w-[200px] h-[40px] flex items-center justify-center border-2 border-white text-white bg-black rounded-[10px] text-[18px] cursor-pointer">
                 Dashboard
               </div>
             </>

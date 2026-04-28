@@ -22,7 +22,6 @@ const  CoursesScheme = new mongoose.Schema({
     },
     price:{
         type:Number,
-        required:true
     },
     thumbnail:{
        type:String,
@@ -36,7 +35,7 @@ const  CoursesScheme = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"lecture"
     },
-    create:{
+    createdBy:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"users"
     },
