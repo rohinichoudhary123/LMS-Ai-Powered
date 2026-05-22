@@ -8,8 +8,10 @@ import { RiOpenaiFill } from "react-icons/ri";
 import { SiGoogledataproc } from "react-icons/si";
 import { BsClipboardDataFill } from "react-icons/bs";
 import { SiOpenaigym } from "react-icons/si";
+import { useNavigate } from "react-router";
 
 const ExploreCourses = () => {
+  const navigate = useNavigate()
   return (
     <div className="w-[100vw] min-h-[50vh] lg:h-[50vh] flex flex-col lg:flex-row items-center justify-center gap-4 px-[30px]">
       <div className="w-[100%] lg:w-[350px] lg:h-[100%] h-[400px] flex flex-col items-start justify-center gap-1 md:px-[40px] px-[20px]">
@@ -19,7 +21,7 @@ const ExploreCourses = () => {
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt eveniet
           accusantium eaque deleniti architecto minus iste assumenda ducimus?
         </p>
-        <button className="px-5 py-2.5 border-2 cursor-pointer bg-black border-white text-white rounded-[10px] text-[18px] font-light flex gap-2 mt-8">
+        <button  onClick={()=> navigate("/allCourses")} className="px-5 py-2.5 border-2 cursor-pointer bg-black border-white text-white rounded-[10px] text-[18px] font-light flex gap-2 mt-8">
           Explore Courses
           <SiViaplay className=" w-[26px] h-[26px] lg:fill-white fill-black" />
         </button>

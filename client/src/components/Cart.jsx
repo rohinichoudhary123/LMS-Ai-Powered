@@ -1,5 +1,5 @@
 import React from 'react'
-import { CiStar } from "react-icons/ci";
+import { FaStar } from "react-icons/fa";
 
 const Cart = ({thumbnail , title , category , price , id}) => {
   return (
@@ -12,8 +12,8 @@ const Cart = ({thumbnail , title , category , price , id}) => {
 
 
            <div className='flex justify-between text-sm text-gray-600 mt-5 px-[10px]'>
-            <span className='font-semibold text-gray-800'>{price}</span>
-            <span className='flex items-center gap-1'><CiStar  className='text-yellow-300'/>4</span>
+            <span className='font-semibold text-gray-800'>₹{price}</span>
+            <span className='flex items-center gap-1'><FaStar size={22}  className='text-yellow-300'/>4</span>
            </div>
         </div>
 

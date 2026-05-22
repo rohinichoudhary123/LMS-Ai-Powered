@@ -15,6 +15,7 @@ import CreateCourses from "./page/educator/CreateCourses"
 import useGetCreateCourses from "./customeHook/useGetCreateCourses";
 import EditCourses from "./page/educator/EditCourses";
 import useGetPublished from "./customeHook/useGetPublished";
+import AllCourses from "./page/AllCourses";
 
 const App = () => {
    useCurrentUser()
@@ -32,6 +33,7 @@ const App = () => {
         {/* <Route path="/forget"  element = {userData ? <ForgetPass/> : <Navigate to={"/SingUp"}/>}/> */}
         <Route path="/forget" element={<ForgetPass/>}/>
         <Route path="/editProfile" element={ userData ?<EditPage/> : <Navigate to={"/SingUp"}/>}/>
+           <Route path="/allCourses" element={ userData ?<AllCourses/> : <Navigate to={"/SingUp"}/>}/>
         <Route path="/dashBoard"   element={userData?.role === "Educator" ? <Dashboard/> : <Navigate to={"/singUp"} /> } />
         <Route path="/courses" element={ userData ?<Courses/> : <Navigate to={"/singUp"}/>} />
         <Route path="/createCourses"   element={userData?.role === "Educator" ? <CreateCourses/>: <Navigate to={"/singUp"} /> } />

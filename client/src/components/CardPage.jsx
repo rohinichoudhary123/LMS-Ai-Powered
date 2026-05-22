@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import Cart from "./Cart";
 
 const CardPage = () => {
-  let { courseData } = useSelector((state) => state.course);
+  const { courseData } = useSelector((state) => state.course);
+  console.log(courseData);
+  
   const [popularCourses, setPopularCourses] = useState([]);
 
   useEffect(() => {
-    setPopularCourses(courseData ? courseData.slice(0, 6) : []);
+   setPopularCourses(courseData?.data?.slice(0, 6) || []);
   }, [courseData]);
   return (
     <div className="relative flex items-center justify-center flex-col">
@@ -19,8 +21,8 @@ const CardPage = () => {
         , and unlock opportunities in tech , AI , business nad beyond.
       </span>
 
-      <div className="w-[100%] min-h-[100vh]  flex items-center  justify-center flex-wrap gap-[50px] lf:p-[50px] md:p-[30px] p-[10px] mb-[40px]">
-        {popularCourses?.map((course, index) => {
+      <div className="w-[100%]   flex items-center  justify-center flex-wrap gap-15 lf:p-[50px] md:p-[30px] p-[10px] mb-[40px]">
+        {popularCourses?.map((course) => {
           return (
             <Cart
               key={course._id}
